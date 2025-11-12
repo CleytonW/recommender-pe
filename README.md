@@ -13,6 +13,8 @@ This project is proprietary. The source code is made available exclusively for a
 
 \*Corresponding author: douglas.iff@gmail.com
 
+\*Article: https://sol.sbc.org.br/index.php/mssis/article/view/36851
+
 # Points of Interest Recommendation System in Recife with Content-Based Filtering and Pernambuco Passport
 
 ## Project Overview
