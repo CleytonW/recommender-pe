@@ -1,272 +1,1721 @@
 {
 	"info": {
-		"_postman_id": "03430e46-b006-4a61-929f-4670e4de91b6",
+		"_postman_id": "41a5871e-8112-45ce-ab93-b80ab891e1d4",
 		"name": "Recommender-System-PE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26744197"
+		"_exporter_id": "44798702"
 	},
 	"item": [
 		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"richard@example.com\",\r\n    \"userPassword\": \"Senha123*\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/auth/v1/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"auth",
-						"v1",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Mariana\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-10\",\r\n    \"gender\": \"Feminino\",\r\n    \"cpf\": \"98765432100\",\r\n    \"phone\": \"11998765432\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central\",\r\n        \"number\": 250,\r\n        \"complement\": \"Casa 5\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/user/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"user",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Login - 400 - Empty fields",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6Im1hcmlhbmFAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjI5MjYsImlkIjoxLCJyb2xlIjoiVVNFUiJ9.L9YxmqWaoYTq48l5Eba6zYqU0SpMoqNQE8WnNEZgKPo",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"Jhon\",\r\n  \"lastName\": \"Doe\",\r\n  \"birthDate\": null,\r\n  \"gender\": \"\",\r\n  \"phone\": \"\",\r\n  \"address\": {\r\n    \"street\": \"\",\r\n    \"number\": \"\",\r\n    \"complement\": \"\",\r\n    \"neighborhood\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"country\": \"\",\r\n    \"zipCode\": \"\"\r\n  }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/user/profile/me",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"user",
-						"profile",
-						"me"
-					]
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"userPassword\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "StartFragmentVerifica o envio de campos vazios na requisição e retorna um erro 400 indicando que os valores obrigatórios não foram preenchidos.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - 400 - Body incomplete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"richard@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "StartFragmentValida uma requisição enviada com body incompleto e retorna um erro 400 indicando ausência ou inconsistência de campos obrigatórios.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - 401 - Non-existent email address (pending)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"richard3@example.com\",\r\n    \"userPassword\": \"Senha123*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "StartFragmentImpede a autenticação quando o e-mail informado não existe no sistema e retorna um erro 401 indicando credenciais inválidas.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - 400 - invalid Email format",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"richardexample.com\",\r\n    \"userPassword\": \"Senha123*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "StartFragmentValida um e-mail enviado em formato inválido e retorna um erro 400 indicando que o campo não atende ao padrão esperado.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - 401 - Password invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"richard@example.com\",\r\n    \"userPassword\": \"Senha123*1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "StartFragmentVerifica uma tentativa de autenticação com senha incorreta e retorna um erro 401 indicando credenciais inválidas.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Login - 200 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"richard@example.com\",\r\n    \"userPassword\": \"Senha123*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/v1/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"v1",
+								"login"
+							]
+						},
+						"description": "Realiza autenticação do usuário e retorna um JWT para acesso às rotas privadas"
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "User By Id",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"name": "USER",
+			"item": [
+				{
+					"name": "User By ID - 400 - Mismatch id",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjM0NzEsImlkIjoyLCJyb2xlIjoiTUFTVEVSIn0.TKxKoBT8LTZ8NrlefKTdKHqgpO_ZTJK3E_3BpgNjrEE",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"id\": 1,\r\n  \"firstName\": \"Douglas\",\r\n  \"lastName\": \"Fragoso\",\r\n  \"birthDate\": \"1995-08-10\",\r\n  \"gender\": \"Masculino\",\r\n  \"cpf\": null,\r\n  \"phone\": \"\",\r\n  \"email\": \"\",\r\n  \"role\": \"ADMIN\",\r\n  \"status\": null\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/user/id/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"user",
-						"id",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/id/aaa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"id",
+								"aaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User By ID - 200 - Sucess",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjYyNzgsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.0D5YBa9IFycI2KrMQ_K4VXp3ww3zA2x4IZlHalQaXvw",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/user",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"user"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User By ID",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NjM0OTY4MTksImlkIjoxLCJyb2xlIjoiQURNSU4ifQ.vbwm1yXu2ZK-Ho7sDo0akb6YSA7Os41a7yTH4Qdwi6Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/id/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User By ID - 400 - User not found",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjYyNzgsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.0D5YBa9IFycI2KrMQ_K4VXp3ww3zA2x4IZlHalQaXvw",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/user/id/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"user",
-						"id",
-						"1"
-					]
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/id/1111",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"id",
+								"1111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users - 200 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update by ID - 200 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is string\", function () {\r",
+									"    pm.expect(typeof pm.response.text()).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Mensagem correta\", function () {\r",
+									"    pm.expect(pm.response.text()).to.eql(\"Profile updated successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta ok\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"firstName\": \"Douglas\",\r\n  \"lastName\": \"Fragoso\",\r\n  \"birthDate\": \"1995-08-10\",\r\n  \"gender\": \"Masculino\",\r\n  \"cpf\": null,\r\n  \"phone\": \"\",\r\n  \"email\": \"\",\r\n  \"role\": \"ADMIN\",\r\n  \"status\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/id/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updade - 200 - Invalid Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is string\", function () {\r",
+									"    pm.expect(typeof pm.response.text()).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Mensagem correta\", function () {\r",
+									"    pm.expect(pm.response.text()).to.eql(\"Profile updated successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta ok\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NjM0OTQxMTUsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.HV9_RrFHmIAddHPODX6LSXMjaYUXfOB54131eNAuSH8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"birthDate\": \"\",\r\n  \"gender\": \"123456\",\r\n  \"phone\": \"\",\r\n  \"address\": {\r\n    \"street\": \"\",\r\n    \"number\": \"\",\r\n    \"complement\": \"\",\r\n    \"neighborhood\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"country\": \"\",\r\n    \"zipCode\": \"\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updade - 403 - Body invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is string\", function () {\r",
+									"    pm.expect(typeof pm.response.text()).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Mensagem correta\", function () {\r",
+									"    pm.expect(pm.response.text()).to.eql(\"Profile updated successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta ok\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"birthDate\": \"AAAAA\",\r\n  \"gender\": \"\",\r\n  \"phone\": \"\",\r\n  \"address\": {\r\n    \"street\": \"\",\r\n    \"number\": \"\",\r\n    \"complement\": \"\",\r\n    \"neighborhood\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"country\": \"\",\r\n    \"zipCode\": \"\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updade - 200 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response is string\", function () {\r",
+									"    pm.expect(typeof pm.response.text()).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Mensagem correta\", function () {\r",
+									"    pm.expect(pm.response.text()).to.eql(\"Profile updated successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta ok\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NjM0OTQxMTUsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.HV9_RrFHmIAddHPODX6LSXMjaYUXfOB54131eNAuSH8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"birthDate\": \"1993-05-10\",\r\n  \"gender\": \"\",\r\n  \"phone\": \"\",\r\n  \"address\": {\r\n    \"street\": \"\",\r\n    \"number\": \"\",\r\n    \"complement\": \"\",\r\n    \"neighborhood\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"country\": \"\",\r\n    \"zipCode\": \"\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Invalid CPF format",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariane\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-11\",\r\n    \"gender\": \"Female\",\r\n    \"cpf\": \"98765432101\",\r\n    \"phone\": \"11998765435\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central 2\",\r\n        \"number\": 255,\r\n        \"complement\": \"Casa 10\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentValida o CPF informado e retorna um erro 400 quando o número não atende aos requisitos formais de um CPF válido no Brasil.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Required fields missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariana\",\r\n    \"birthDate\": \"1995-08-10\",\r\n    \"gender\": \"Female\",\r\n    \"cpf\": \"98765432100\",\r\n    \"phone\": \"11998765432\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central\",\r\n        \"number\": 250,\r\n        \"complement\": \"Casa 5\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentRetorna um erro 400 quando um ou mais campos obrigatórios não são fornecidos na requisição.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - CPF registered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariana\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-10\",\r\n    \"gender\": \"Female\",\r\n    \"cpf\": \"98765432100\",\r\n    \"phone\": \"11998765433\",\r\n    \"email\": \"mariana1@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central\",\r\n        \"number\": 250,\r\n        \"complement\": \"Casa 5\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentImpede o cadastro de um novo usuário quando o CPF informado já está registrado e retorna um erro 409 indicando duplicidade de dados.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Email already registered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariane\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-11\",\r\n    \"gender\": \"Female\",\r\n    \"cpf\": \"98134019072\",\r\n    \"phone\": \"11998765434\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central 2\",\r\n        \"number\": 255,\r\n        \"complement\": \"Casa 10\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentImpede o cadastro de um novo usuário quando o E-mail informado já está registrado e retorna um erro 409 indicando duplicidade de dados.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Gender Invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariana\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-10\",\r\n    \"gender\": \"Feminino\",\r\n    \"cpf\": \"98765432100\",\r\n    \"phone\": \"11998765432\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central\",\r\n        \"number\": 250,\r\n        \"complement\": \"Casa 5\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentValida o envio de um valor de gênero fora dos padrões permitidos e retorna um erro 400 indicando que o campo possui um valor inválido.EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 201 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mariana\",\r\n    \"lastName\": \"Silva\",\r\n    \"birthDate\": \"1995-08-10\",\r\n    \"gender\": \"Female\",\r\n    \"cpf\": \"98765432100\",\r\n    \"phone\": \"11998765432\",\r\n    \"email\": \"mariana@example.com\",\r\n    \"userPassword\": \"Segura456*\",\r\n    \"address\": {\r\n        \"street\": \"Avenida Central\",\r\n        \"number\": 250,\r\n        \"complement\": \"Casa 5\",\r\n        \"neighborhood\": \"Centro\",\r\n        \"city\": \"SP\",\r\n        \"state\": \"SP\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"01000000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "StartFragmentCria um novo usuário com os dados fornecidos e retorna status 201 indicando que o registro foi realizado com sucessoEndFragment"
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "POI",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"item": [
+				{
+					"name": "Register - 201 - Sucess",
+					"event": [
 						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjUyMDUsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.Az5sIzWMg1Z1eyMZlNO70lBJi0g--jMSGbipNWf2gH8",
-							"type": "string"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"motivations\": [\r\n        \"RELAXATION\",\r\n        \"FAMILY\",\r\n        \"CULTURE\",\r\n        \"ENTERTAINMENT\",\r\n        \"EXPLORATION\"\r\n    ],\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"LEARNING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"city\": \"Recife\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455000\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/poi/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "8080",
-					"path": [
-						"poi",
-						"register"
-					]
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"motivations\": [\r\n        \"RELAXATION\",\r\n        \"FAMILY\",\r\n        \"CULTURE\",\r\n        \"ENTERTAINMENT\",\r\n        \"EXPLORATION\"\r\n    ],\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"LEARNING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"city\": \"Recife\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455000\"\r\n    },\r\n    \r\n    \"name\": \"Parque Estadual Exemplo\",\r\n    \"description\": \"Uma descrição de exemplo com mais de cinquenta caracteres para satisfazer a validação da aplicação e demonstrar um POI válido.\",\r\n    \"motivations\": [\r\n    \"CULTURE\",\r\n    \"EXPLORATION\",\r\n    \"RELAXATION\",\r\n    \"EDUCATION\",\r\n    \"FAMILY\"\r\n    ],\r\n    \"hobbies\": [\r\n    \"ADVENTURE\",\r\n    \"ART\",\r\n    \"HIKING\",\r\n    \"MUSIC\",\r\n    \"PHOTOGRAPHY\"\r\n    ],\r\n    \"themes\": [\r\n    \"NATURE\",\r\n    \"HISTORY\",\r\n    \"CULTURAL\",\r\n    \"ADVENTURE\",\r\n    \"MODERN\"\r\n    ],\r\n    \"address\": {\r\n    \"street\": \"Rua Exemplo\",\r\n    \"number\": 100,\r\n    \"complement\": \"Apto 202\",\r\n    \"neighborhood\": \"Boa Viagem\",\r\n    \"city\": \"Recife\",\r\n    \"state\": \"PE\",\r\n    \"country\": \"Brasil\",\r\n    \"zipCode\": \"50000000\"\r\n    },\r\n    \"status\": \"ACTIVE\"\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/poi/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"poi",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Incomplete body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"LEARNING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"city\": \"Recife\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/poi/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"poi",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Invalid enum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"motivations\": [\r\n        \"RELAX\",\r\n        \"FAMILY\",\r\n        \"CULTURA\",\r\n        \"ENTERTAINMENT\",\r\n        \"EXPLORATION\"\r\n    ],\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"LEARNING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"city\": \"Recife\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/poi/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"poi",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - 400 - Invalid zip code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"motivations\": [\r\n        \"RELAXATION\",\r\n        \"FAMILY\",\r\n        \"CULTURE\",\r\n        \"ENTERTAINMENT\",\r\n        \"EXPLORATION\"\r\n    ],\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"LEARNING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"city\": \"Recife\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/poi/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"poi",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POI - 200 - Sucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é o esperado\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Resposta é JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de resposta < 800ms\", function \r",
+									"() {    \r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800); \r",
+									"}); \r",
+									"\r",
+									"pm.test(\"Resposta contém token\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/poi",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"poi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POI - 400 - Invalid POI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjYyNzgsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.0D5YBa9IFycI2KrMQ_K4VXp3ww3zA2x4IZlHalQaXvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/poi/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"poi",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "POI",
@@ -286,90 +1735,6 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"Parque Ecológico\",\r\n    \"description\": \"Reserva natural com trilhas e observatório de pássaros. Um local ideal para relaxar e conectar-se com a natureza.\",\r\n    \"motivations\": [\r\n        \"RELAXATION\",\r\n        \"FAMILY\",\r\n        \"CULTURE\",\r\n        \"ENTERTAINMENT\",\r\n        \"EXPLORATION\"\r\n    ],\r\n    \"hobbies\": [\r\n        \"HIKING\",\r\n        \"BIRD_WATCHING\",\r\n        \"PHOTOGRAPHY\",\r\n        \"GARDENING\",\r\n        \"TRAVELING\"\r\n    ],\r\n    \"themes\": [\r\n        \"ADVENTURE\",\r\n        \"NATURE\",\r\n        \"CULTURAL\",\r\n        \"FAMILY_FRIENDLY\",\r\n        \"HISTORY\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"Rua das Araucárias\",\r\n        \"number\": 450,\r\n        \"complement\": \"Entrada principal\",\r\n        \"neighborhood\": \"Zona Rural\",\r\n        \"state\": \"PR\",\r\n        \"country\": \"Brasil\",\r\n        \"zipCode\": \"83455000\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/poi/id/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"poi",
-						"id",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POI",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjYyNzgsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.0D5YBa9IFycI2KrMQ_K4VXp3ww3zA2x4IZlHalQaXvw",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/poi",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"poi"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POI By ID",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWNvbW1lbmRlcnBlLWFwaSIsInN1YiI6InJpY2hhcmRAZXhhbXBsZS5jb20iLCJleHAiOjE3NTU0NjYyNzgsImlkIjoxLCJyb2xlIjoiTUFTVEVSIn0.0D5YBa9IFycI2KrMQ_K4VXp3ww3zA2x4IZlHalQaXvw",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
