@@ -12,6 +12,7 @@ import com.recommendersystempe.models.Address;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,8 @@ public class UserDTOUpdate {
     @Getter
     @Setter
     @Schema(description = "Gender of a user", example = "Male", required = true)
+    @Size(min = 0, max = 9, message = "The field gender must be between 5 and 9 characters")
+    @Pattern(regexp = "^(Male|Female|Other|)$", message = "Gender must be Male, Female, or Other")
     private String gender;
 
     @Getter
